@@ -1,15 +1,13 @@
 import React from 'react'
+import { Col, Navbar, Container, Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import Navbar from 'react-bootstrap/Navbar'
-import Container from 'react-bootstrap/Container'
-import Nav from 'react-bootstrap/Nav'
 import { PersonFill } from 'react-bootstrap-icons'
 import logo from '../../assets/mermaidLogo.jpg'
-import { Col } from 'react-bootstrap'
 
 export default function Navigation() {
     return (
-        <Navbar bg="light"  expand="md" sticky="top" >
+        <Navbar bg="light"  expand="md" sticky="top">
+            <Container fluid>
                 <LinkContainer to="/">
                     <Navbar.Brand>
                         <img 
@@ -21,7 +19,7 @@ export default function Navigation() {
                     </Navbar.Brand>
                 </LinkContainer>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" className='float-right'/>
-                <Container>
+                <Container fluid>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Col>
                     <LinkContainer to="/single-dive">
@@ -45,6 +43,7 @@ export default function Navigation() {
                     </Col>
                 </Navbar.Collapse>
                 </Container>
+            </Container>
         </Navbar>
     )
 }
