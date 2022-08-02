@@ -6,8 +6,8 @@ on:
     types:
       - labeled
 permissions:
-  pull-requests: read|write
-  repository-projects: read|write
+  pull-requests: write
+  repository-projects: write
 jobs:
   add-to-project:
     name: Add PR to project
