@@ -1,4 +1,4 @@
-name: Move assigned card
+name: Move assigned card column
 on:
   pull_request:
     types:
