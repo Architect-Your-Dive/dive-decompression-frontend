@@ -1,18 +1,35 @@
-
-
-name: Add Dependabot Pull Requests to Project Board
+name: Project automations
 on:
+  issues:
+    types:
+      - opened
   pull_request:
     types:
       - labeled
-
 jobs:
-  add-to-project:
-    name: Add PR to project
+  issue_opened:
+    name: issue_opened
     runs-on: ubuntu-latest
+    if: github.event_name == 'issues' && github.event.action == 'opened'
     steps:
-      - uses: actions/add-to-project@v0.3.0
+      - name: Move issue to Backlog
+        uses: leonsteinhaeuser/project-beta-automations@v1.3.0
         with:
-          project-url: https://github.com/orgs/Architect-Your-Dive/projects/1
-          github-token: ${{ secrets.MY_GITHUB_TOKEN }}
-          labeled: dependencies
+          gh_token: ${{ secrets.MY_GITHUB_TOKEN }}
+          organization: Architect-Your-Dive
+          project_id: 1
+          resource_node_id: ${{ github.event.issue.node_id }}
+          status_value: Todo # Target status
+  pr_labeled:
+    name: pr_labeled
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && contains( github.event.pull_request.labels.*.name, 'dependencies')
+    steps:
+      - name: Move PR to Ready to work
+        uses: leonsteinhaeuser/project-beta-automations@v1.3.0
+        with:
+          gh_token: ${{ secrets.MY_GITHUB_TOKEN }}
+          organization: Architect-Your-Dive
+          project_id: 1
+          resource_node_id: ${{ github.event.pull_request.node_id }}
+          status_value: Ready to work # Target status
