@@ -46,5 +46,6 @@ jobs:
           gh_token: ${{ secrets.MY_GITHUB_TOKEN }}
           organization: Architect-Your-Dive
           project_id: 1
-          resource_node_id: ${{ github.event.pull_request.node_id }} || ${{ github.event.issue.node_id }}
+          service_type: "{{ 'NodePort' if expose_service == 'true' else 'ClusterIP' }}"
+          resource_node_id: "{{ ${{ github.event.pull_request.node_id }} github.event_name == 'pull_request' else ${{ github.event.issue.node_id }} }}"
           status_value: Ready to Work # Target status
