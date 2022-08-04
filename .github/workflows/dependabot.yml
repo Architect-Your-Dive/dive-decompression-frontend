@@ -24,7 +24,7 @@ jobs:
   needs_investigation:
     name: needs_investigation
     runs-on: ubuntu-latest
-    if: github.event.action == 'labeled' && contains( github.event.issues.labels.*.name, 'needs investigation')
+    if: github.event.action == 'labeled' && github.event.label.name == 'needs investigation')
     steps:
       - name: Move needs investigation labeled issues to Needs Investigation status
         uses: leonsteinhaeuser/project-beta-automations@v1.3.0
@@ -38,7 +38,7 @@ jobs:
     name: ready_to_work
     runs-on: ubuntu-latest
     if: (github.event_name == 'pull_request' && contains( github.event.pull_request.labels.*.name, 'dependencies')) ||
-      (github.event.action == 'labeled' && contains( github.event.issues.labels.*.name, 'approved'))
+      (github.event.action == 'labeled' && github.event.label.name == 'approved')
     steps:
       - name: Move Dependabot PR or approved issues to Ready to work
         uses: leonsteinhaeuser/project-beta-automations@v1.3.0
