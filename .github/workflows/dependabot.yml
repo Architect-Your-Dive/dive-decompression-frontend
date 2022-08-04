@@ -24,7 +24,7 @@ jobs:
   needs_investigation:
     name: needs_investigation
     runs-on: ubuntu-latest
-    if: github.event.action == 'labeled' && github.event.label.name == 'needs investigation')
+    if: github.event.action == 'labeled' && github.event.label.name == 'needs investigation'
     steps:
       - name: Move needs investigation labeled issues to Needs Investigation status
         uses: leonsteinhaeuser/project-beta-automations@v1.3.0
